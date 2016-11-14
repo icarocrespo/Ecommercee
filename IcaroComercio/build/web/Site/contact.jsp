@@ -13,8 +13,8 @@
         <link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
         <script type="text/javascript" src="js/megamenu.js"></script>
         <script>$(document).ready(function () {
-        $(".megamenu").megamenu();
-    });</script>
+                $(".megamenu").megamenu();
+            });</script>
         <!-- cart -->
         <script src="js/simpleCart.min.js"></script>
         <!-- cart -->
@@ -26,7 +26,7 @@
         <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
 
         <script>
-        // Can also be used with $(document).ready()
+            // Can also be used with $(document).ready()
             $(window).load(function () {
                 $('.flexslider').flexslider({
                     animation: "slide",
@@ -48,26 +48,23 @@
                         </div>
                         <div class="contact-grids">
                             <div class="col-md-6 contact-left">
-                                <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below 
-                                    for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum
-                                    et Malorum" by Cicero are also reproduced in their exact original form, 
-                                    accompanied by English versions from the 1914 translation by H. Rackham.</p>
+                                <p>Alguma coisa.</p>
                                 <address>
-                                    <p>The Company Name Inc.</p>
-                                    <p>7899 St Vincent Place,</p>
-                                    <p>Glasgow,Le 99 Pr 45.</p>
+                                    <p>Doritos colorido artificialmente.</p>
+                                    <p>Madezatti,</p>
+                                    <p>Ao lado do museu e perto da igreja.</p>
                                     <p>Telephone : +1 800 603 6035</p>
-                                    <p>FAX : +1 800 889 9898</p>
+                                    <p>FAX : 84074070</p>
                                     <p>E-mail : <a href="mailto:example@mail.com">example@mail.com</a></p>
                                 </address>
                             </div>
                             <div class="col-md-6 contact-right">
-                                <form>
-                                    <h5>name</h5>
+                                <form action="contact.jsp" method="post">
+                                    <h5>Nome</h5>
                                     <input type="text">
-                                    <h5>emailaddress</h5>
+                                    <h5>Endereço de Email</h5>
                                     <input type="text">
-                                    <h5>message</h5>
+                                    <h5>Mensagem</h5>
                                     <textarea></textarea>
                                     <input type="submit" value="send">
                                 </form>

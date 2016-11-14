@@ -68,9 +68,9 @@
                         %>
                         <tr>
                             <td><%=item.getCodigo()%></td>
-                            <td><%=item.getNome()%></td>
+                            <td><%=item.getNome()%></td>                            
                             <td><a href="upd.jsp?codigo=<%=item.getCodigo()%>" class="btn  btn-primary btn-sm">Alterar</a>
-                                <a href="index.jsp?codigo=<%=item.getCodigo()%>" class="btn  btn-warning btn-sm">Excluir</a>  
+                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal" onclick="codigo=<%=item.getCodigo()%>">Excluir</button>
                             </td>
                         </tr>
                         <%
@@ -85,4 +85,5 @@
     </div>
     <!-- /.panel -->
 </div>
+<%@include file="../modalexcluir.jsp" %>                        
 <%@include file="../rodape.jsp" %>

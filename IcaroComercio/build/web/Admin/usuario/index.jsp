@@ -58,6 +58,7 @@
                             <th>Login</th>
                             <th>Senha</th>
                             <th>Administrador</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -75,7 +76,8 @@
                             <td><%=item.getSenha()%></td>
                             <td><%=admin%></td>
                             <td><a href="upd.jsp?codigo=<%=item.getLogin()%>" class="btn  btn-primary btn-sm">Alterar</a>
-                                <a href="index.jsp?codigo=<%=item.getLogin()%>" class="btn  btn-warning btn-sm">Excluir</a>  
+                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal" onclick="codigo=<%=item.getLogin()%>">Excluir</button>
+  
                             </td>
                         </tr>
                         <%
@@ -90,4 +92,5 @@
     </div>
     <!-- /.panel -->
 </div>
+<%@include file="../modalexcluir.jsp" %> 
 <%@include file="../rodape.jsp" %>

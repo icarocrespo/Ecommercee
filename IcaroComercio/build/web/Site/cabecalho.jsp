@@ -1,3 +1,5 @@
+<%@page import="modelo.Venda"%>
+<%@page import="dao.VendaDAO"%>
 <%@page import="modelo.Produto"%>
 <%@page import="modelo.Status"%>
 <%@page import="dao.StatusDAO"%>
@@ -10,6 +12,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
+    VendaDAO vdao = new VendaDAO();
+    Venda vobj = new Venda();
     // p a frente referente à pesquisa
     MarcaDAO mdao = new MarcaDAO();
     List<Marca> mlista = mdao.listar();
@@ -17,42 +21,24 @@
     CategoriaDAO cdao = new CategoriaDAO();
     List<Categoria> clista = cdao.listar();
 
-    CategoriaDAO pcdao = new CategoriaDAO();
-    List<Categoria> pclista;
-
     ProdutoDAO ppdao = new ProdutoDAO();
     List<Produto> pplista;
 
-    MarcaDAO pmdao = new MarcaDAO();
-    List<Marca> pmlista;
-
-    StatusDAO psdao = new StatusDAO();
-    List<Status> pslista;
-
-    if (request.getParameter("txtFiltro") != null) {
-        pclista = pcdao.listar(request.getParameter("txtFiltro"));
-    } else {
-        pclista = pcdao.listar();
-    }
-    if (request.getParameter("txtFiltro") != null) {
-        pmlista = pmdao.listar(request.getParameter("txtFiltro"));
-    } else {
-        pmlista = pmdao.listar();
-    }
-    if (request.getParameter("txtFiltro") != null) {
+    if (request.getParameter("filtroC") != null) {
+        pplista = ppdao.listarTipoC(request.getParameter("filtroC"));
+    } else if (request.getParameter("filtroM") != null) {
+        pplista = ppdao.listarTipoM(request.getParameter("filtroM"));
+    } else if (request.getParameter("txtFiltro") != null) {
         pplista = ppdao.listar(request.getParameter("txtFiltro"));
     } else {
         pplista = ppdao.listar();
     }
-    if (request.getParameter("txtFiltro") != null) {
-        pslista = psdao.listar(request.getParameter("txtFiltro"));
-    } else {
-        pslista = psdao.listar();
-    }
+
+
 %>
 <html>
     <head>
-        <title>Ecommerce</title>
+        <title>Bom Coffee</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
         <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
@@ -63,21 +49,67 @@
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
         <script src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
+        <!--Parte do Single -->
+        <script>
+            // Can also be used with $(document).ready()
+            $(window).load(function () {
+                $('.flexslider').flexslider({
+                    animation: "slide",
+                    controlNav: "thumbnails"
+                });
+            });
+        </script>        
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="Swim Wear Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+              Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+        <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+        <script src="js/jquery.min.js"></script>
+        <!-- cart -->
+        <script src="js/simpleCart.min.js"></script>
+        <!-- cart -->
+        <script src="js/imagezoom.js"></script>
+        <!-- FlexSlider -->
+        <script defer src="js/jquery.flexslider.js"></script>
+        <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
+        <!-- the jScrollPane script -->
+        <script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
+        <script type="text/javascript" id="sourcecode">
+            $(function ()
+            {
+                $('.scroll-pane').jScrollPane();
+            });
+        </script>
+        <!-- cart -->
+        <script src="js/simpleCart.min.js"></script>
+        <!-- cart -->
+        <!-- the jScrollPane script -->
+        <script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
+        <!-- //the jScrollPane script -->
+        <link href="css/form.css" rel="stylesheet" type="text/css" media="all" />
+        <!-- the mousewheel plugin -->
+        <script type="text/javascript" src="js/jquery.mousewheel.js"></script>
     </head>
     <body>
+        <!--header-->
         <div class="header">
             <div class="header-top">
                 <div class="container">
                     <div class="lang_list">
+                        <select tabindex="4" class="dropdown1">
+                            <option value="" class="label">Pt</option>
+                            <option value="1">Inglês</option>
+                            <option value="2">Francês</option>
+                            <option value="3">Alemão</option>
+                        </select>
                     </div>
                     <div class="top-right">
                         <ul>
                             <li class="text"><a href="login.jsp">login</a></li>
                             <li><div class="cart box_1">
                                     <a href="checkout.jsp">
-                                        <span class="simpleCart_total"> $0.00 </span> (<span id="simpleCart_quantity" class="simpleCart_quantity"> 0 </span>)
+                                        <span class="simpleCart_total"> R$0.00 </span> (<span id="simpleCart_quantity" class="simpleCart_quantity"> 0 </span>)
                                     </a>	
-                                    <p><a href="javascript:;" class="simpleCart_empty">Empty cart</a></p>
+                                    <p><a href="javascript:;" class="simpleCart_empty">Carrinho vazio</a></p>
                                     <div class="clearfix"> </div>
                                 </div></li>
                         </ul>
@@ -97,7 +129,7 @@
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
                                 </button>
-                                <h1 class="navbar-brand"><a  href="index.jsp">Ragatanga</a></h1>
+                                <h1 class="navbar-brand"><a  href="index.jsp">Bom Coffee</a></h1>
                             </div>
                             <!--/.navbar-header-->
 
@@ -108,12 +140,28 @@
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categoria <b class="caret"></b></a>
                                         <ul class="dropdown-menu multi-column columns-3">
                                             <div class="row">
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-4">
+                                                    <ul class="multi-column-dropdown">
+                                                        <%                                                            for (Categoria item : clista) {
+                                                        %>
+                                                        <li><a class="list" href="products.jsp?filtroC=<%=item.getCodigo()%>"><%=item.getNome()%></a></li>
+                                                            <%
+                                                                }
+                                                            %>
+                                                    </ul>
+                                                </div>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Marca <b class="caret"></b></a>
+                                        <ul class="dropdown-menu multi-column columns-3">
+                                            <div class="row">
+                                                <div class="col-sm-4">
                                                     <ul class="multi-column-dropdown">
                                                         <%
-                                                            for (Categoria item : clista) {
+                                                            for (Marca item : mlista) {
                                                         %>
-                                                        <li><a class="list" href="#"><%=item.getNome()%></a></li>
+                                                        <li><a class="list" href="products.jsp?filtroM=<%=item.getCodigo()%>"><%=item.getNome()%></a></li>
                                                             <%
                                                                 }
                                                             %>
@@ -122,44 +170,31 @@
                                             </div>
                                         </ul>
                                     </li>
-                                    <li>
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Marca <b class="caret"></b></a>
-                                        <ul class="dropdown-menu multi-column columns-3">
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <ul class="multi-column-dropdown">
-                                                        <%
-                                                            for (Marca item : mlista) {
-                                                        %>
-                                                        <li><a class="list" href="#"><%=item.getNome()%></a></li>
-                                                            <%
-                                                                }
-                                                            %>
-                                                </div>
-                                            </div>
-                                        </ul>
-                                    </li>
                                 </ul>
                             </div>
-
-                            <div class="search-box">
-                                <div id="sb-search" class="sb-search">
-                                    <form>
-                                        <input class="sb-search-input" placeholder="Texto da pesquisa" type="search" name="txtFiltro" id="search">
-                                        <input class="sb-search-submit" type="submit" value="">
-                                        <span class="sb-icon-search"> </span>
-                                    </form>
-                                </div>
-                            </div>
-                            <script src="js/classie.js"></script>
-                            <script src="js/uisearch.js"></script>
-                            <script>
-                                new UISearch(document.getElementById('sb-search'));
-                            </script>
-                            <!-- //search-scripts -->
-                            <div class="clearfix"></div>
+                            <!--/.navbar-collapse-->
+                        </nav>
+                        <!--/.navbar-->
                     </div>
+                    <div class="search-box">
+                        <div id="sb-search" class="sb-search">
+                            <form action="products.jsp" method="post">
+                                <input class="sb-search-input" placeholder="Digite o texto de sua pesquisa..." type="search" name="txtFiltro" id="search">
+                                <input class="sb-search-submit" type="submit" value="">
+                                <span class="sb-icon-search"> </span>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- search-scripts -->
+                    <script src="js/classie.js"></script>
+                    <script src="js/uisearch.js"></script>
+                    <script>
+            new UISearch(document.getElementById('sb-search'));
+                    </script>
+                    <!-- //search-scripts -->
+                    <div class="clearfix"></div>
                 </div>
             </div>
-    </body>
-</html>
+        </div>
+        <!--header-->

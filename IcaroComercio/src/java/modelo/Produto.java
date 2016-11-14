@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -18,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -25,10 +21,6 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author aluno
- */
 @Entity
 @Table(name = "produto")
 @XmlRootElement
@@ -43,11 +35,22 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Produto.findByImagem1", query = "SELECT p FROM Produto p WHERE p.imagem1 = :imagem1"),
     @NamedQuery(name = "Produto.findByImagem2", query = "SELECT p FROM Produto p WHERE p.imagem2 = :imagem2"),
     @NamedQuery(name = "Produto.findByImagem3", query = "SELECT p FROM Produto p WHERE p.imagem3 = :imagem3"),
-    @NamedQuery(name = "Produto.findFilter", query = "SELECT p FROM Produto p WHERE CAST(p.codigo VARCHAR(50)) like :filtro "
-                                                                                    + "or p.titulo like :filtro "
-                                                                                    + "or p.descricao like :filtro "
-                                                                                    + "or p.quant like :filtro "
-                                                                                    + "or p.preco like :filtro ")})
+    @NamedQuery(name = "Produto.findFilter", query = "SELECT p FROM Produto p WHERE p.titulo like :filtro "),
+                                                                                    //+ "or p.descricao like :filtro "
+                                                                                    //+ "or p.quant like :filtro "
+                                                                                    //+ "or p.preco like :filtro "),
+    @NamedQuery(name = "Produto.findTipoC", query = "SELECT p FROM Produto p WHERE CAST(p.codcategoria.codigo VARCHAR(50)) like :filtro "),
+    @NamedQuery(name = "Produto.findTipoM", query = "SELECT p FROM Produto p WHERE CAST(p.codmarca.codigo VARCHAR(50)) like :filtro")
+})
+
+@NamedNativeQueries({
+    @NamedNativeQuery(name = "Produto.destaque", query = "SELECT * FROM produto where destaque = true limit(8)",
+        resultClass = Produto.class),
+
+    @NamedNativeQuery(name = "Produto.aleatorio", query = "SELECT * FROM produto order by RANDOM()",
+        resultClass = Produto.class)
+})
+
 public class Produto implements Serializable {
 
     private static final long serialVersionUID = 1L;
