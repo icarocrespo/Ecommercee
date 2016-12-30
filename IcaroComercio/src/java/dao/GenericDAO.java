@@ -100,6 +100,12 @@ public abstract class GenericDAO<T, I extends Serializable> {
     public List<T> listarDestaque() throws Exception{
         return em.createNamedQuery(persistedClass.getSimpleName() + ".destaque").getResultList();
     }
+//    public List<T> listarMarcaRelacionado(String filtro) throws Exception{
+//        return em.createNamedQuery(persistedClass.getSimpleName() + ".marcaRelacionado").getResultList();
+//    }
+//    public List<T> listarCategoriaRelacionado(String filtro) throws Exception{
+//        return em.createNamedQuery(persistedClass.getSimpleName() + ".categoriaRelacionado").setParameter("filtro", "%" + filtro + "%").getResultList();
+//    }
     public List<T> listarAleatorio() throws Exception {
         return em.createNamedQuery(persistedClass.getSimpleName() + ".aleatorio").getResultList();
     }

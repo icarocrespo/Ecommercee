@@ -14,7 +14,7 @@
 <%
     VendaDAO vdao = new VendaDAO();
     Venda vobj = new Venda();
-    // p a frente referente à pesquisa
+    //abaixo é referente à pesquisa
     MarcaDAO mdao = new MarcaDAO();
     List<Marca> mlista = mdao.listar();
 
@@ -95,11 +95,12 @@
             <div class="header-top">
                 <div class="container">
                     <div class="lang_list">
-                        <select tabindex="4" class="dropdown1">
-                            <option value="" class="label">Pt</option>
-                            <option value="1">Inglês</option>
-                            <option value="2">Francês</option>
-                            <option value="3">Alemão</option>
+                        <select tabindex="4" class="dropdown1" name="language">
+                            <option value="5">Português</option>
+                            <option value="1">English</option>
+                            <option value="2">François</option>
+                            <option value="3">German</option>
+                            <option value="6">Español</option>
                         </select>
                     </div>
                     <div class="top-right">
@@ -109,7 +110,7 @@
                                     <a href="checkout.jsp">
                                         <span class="simpleCart_total"> R$0.00 </span> (<span id="simpleCart_quantity" class="simpleCart_quantity"> 0 </span>)
                                     </a>	
-                                    <p><a href="javascript:;" class="simpleCart_empty">Carrinho vazio</a></p>
+                                    <p><a href="javascript:;" class="simpleCart_empty">Esvaziar carrinho</a></p>
                                     <div class="clearfix"> </div>
                                 </div></li>
                         </ul>
@@ -142,7 +143,8 @@
                                             <div class="row">
                                                 <div class="col-sm-4">
                                                     <ul class="multi-column-dropdown">
-                                                        <%                                                            for (Categoria item : clista) {
+                                                        <%   
+                                                            for (Categoria item : clista) {
                                                         %>
                                                         <li><a class="list" href="products.jsp?filtroC=<%=item.getCodigo()%>"><%=item.getNome()%></a></li>
                                                             <%
@@ -150,6 +152,7 @@
                                                             %>
                                                     </ul>
                                                 </div>
+                                            </div>
                                         </ul>
                                     </li>
                                     <li class="dropdown">

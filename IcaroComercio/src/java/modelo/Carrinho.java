@@ -23,6 +23,4 @@ public class Carrinho {
     public void setTotal(BigDecimal total) {
         this.total = total;
     }
-    
-    
 }

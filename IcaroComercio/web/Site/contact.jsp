@@ -1,3 +1,38 @@
+<%@page import="util.EnviarEmail"%>
+<%
+    String mensagemUsuario = null;
+
+if (request.getMethod().equals("POST")) {
+    EnviarEmail enviar = new EnviarEmail();
+    enviar.setEmailDestinatario("icarocrespo@gmail.com");
+    enviar.setAssunto("Contato - Bom Coffee");
+    //uso StringBuffer para otimizar a concatenação 
+    //de string
+    StringBuffer texto = new StringBuffer(); 
+    texto.append("<h2 align='center'>BomCoffee</h2>");
+    texto.append("Informações: <br/>");
+    texto.append("Nome Contato: ");
+    texto.append(request.getParameter("txtNome"));
+    texto.append("<br/>");
+    texto.append("Email Contato: ");
+    texto.append(request.getParameter("txtRemetente"));
+    texto.append("<br/>");
+    texto.append("Mensagem: ");
+    texto.append(request.getParameter("txtMensagem"));
+    enviar.setMsg(texto.toString());
+    
+    boolean enviou = enviar.enviarGmail();
+    if (enviou) {
+            
+            mensagemUsuario = "Dados enviados com sucesso";
+           
+        } else {
+            mensagemUsuario = "Não foi enviar as informações";
+            
+        }
+  
+}
+%>
 <html>
     <head>
         <title>Ecommerce</title>
@@ -52,21 +87,18 @@
                                 <address>
                                     <p>Doritos colorido artificialmente.</p>
                                     <p>Madezatti,</p>
-                                    <p>Ao lado do museu e perto da igreja.</p>
-                                    <p>Telephone : +1 800 603 6035</p>
-                                    <p>FAX : 84074070</p>
-                                    <p>E-mail : <a href="mailto:example@mail.com">example@mail.com</a></p>
+                                    <p>E-mail : <a href="icarocrespo@gmail.com">icarocrespo@gmail.com</a></p>
                                 </address>
                             </div>
                             <div class="col-md-6 contact-right">
                                 <form action="contact.jsp" method="post">
                                     <h5>Nome</h5>
-                                    <input type="text">
+                                    <input type="text" name="txtNome">
                                     <h5>Endereço de Email</h5>
-                                    <input type="text">
+                                    <input type="text" name="txtRemetente">
                                     <h5>Mensagem</h5>
-                                    <textarea></textarea>
-                                    <input type="submit" value="send">
+                                    <textarea name="txtMensagem"></textarea>
+                                    <input type="submit" value="Enviar">
                                 </form>
                             </div>
                             <div class="clearfix"></div>
@@ -74,5 +106,6 @@
                     </div>
                 </div>
             </div>
+        </div>
     </body>
 </html>

@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha"),
     @NamedQuery(name = "Usuario.findByAdmin", query = "SELECT u FROM Usuario u WHERE u.admin = :admin"),
     @NamedQuery(name = "Usuario.findFilter", query = "SELECT u FROM Usuario u WHERE u.login like :filtro " 
-                                                                        + "or u.admin like :filtro ")})
+                                                                        + "or CAST(u.admin VARCHAR(50)) like :filtro ")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;

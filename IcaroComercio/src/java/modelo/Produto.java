@@ -46,7 +46,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedNativeQueries({
     @NamedNativeQuery(name = "Produto.destaque", query = "SELECT * FROM produto where destaque = true limit(8)",
         resultClass = Produto.class),
-
+//    @NamedNativeQuery(name = "Produto.marcaRelacionado", query = "SELECT p FROM Produto p order by RANDOM()  limit 4",
+//    resultClass = Produto.class),
+//    @NamedNativeQuery(name = "Produto.categoriaRelacionado", query = "SELECT p FROM Produto p WHERE CAST(p.codcategoria.codigo VARCHAR(5)) like :filtro limit(4) order by RANDOM()",
+//    resultClass = Produto.class),
     @NamedNativeQuery(name = "Produto.aleatorio", query = "SELECT * FROM produto order by RANDOM()",
         resultClass = Produto.class)
 })

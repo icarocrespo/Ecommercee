@@ -1,4 +1,18 @@
+<%@page import="util.Criptografia"%>
+<%@page import="modelo.Cliente"%>
+<%@page import="dao.ClienteDAO"%>
 <%@include file="cabecalho.jsp" %>
+<%    if (request.getMethod().equals("POST")) {
+        ClienteDAO dao = new ClienteDAO();
+        List<Cliente> cliente = dao.listar();
+        for (Cliente item : cliente) {
+            if (request.getParameter("txtEmail").equals(item.getEmail()) && Criptografia.convertPasswordToMD5(request.getParameter("txtSenha")).equals(item.getSenha())) {
+                
+            }
+        }
+    }
+%>
+
 <html>
     <head>
         <title>Ecommerce</title>
@@ -22,13 +36,13 @@
         <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
 
         <script>
-        // Can also be used with $(document).ready()
-        $(window).load(function () {
-            $('.flexslider').flexslider({
-                animation: "slide",
-                controlNav: "thumbnails"
+            // Can also be used with $(document).ready()
+            $(window).load(function () {
+                $('.flexslider').flexslider({
+                    animation: "slide",
+                    controlNav: "thumbnails"
+                });
             });
-        });
         </script>
     </head>
     <body>
@@ -64,7 +78,7 @@
                 </div>
             </div>
         </div>        
-</body>
+    </body>
 </html>
 <%@include file="rodape.jsp" %>
 

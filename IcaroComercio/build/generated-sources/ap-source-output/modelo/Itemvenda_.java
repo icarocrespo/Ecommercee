@@ -7,7 +7,7 @@ import modelo.ItemvendaPK;
 import modelo.Produto;
 import modelo.Venda;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2016-10-12T14:02:48")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2016-12-20T14:24:31")
 @StaticMetamodel(Itemvenda.class)
 public class Itemvenda_ { 
 

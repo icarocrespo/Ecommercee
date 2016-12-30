@@ -19,7 +19,7 @@
     Produto obj = new Produto();
     Upload up = new Upload();
     up.setFolderUpload("fotos");
-    if (up.getForm().get("txtTitulo").toString() != null) {
+    if (request.getMethod().equals("POST")) {
         if (up.formProcess(getServletContext(), request)) {
 
             Categoria categoria = new Categoria();

@@ -1,3 +1,4 @@
+<%@page import="util.Criptografia"%>
 <%@page import="dao.UsuarioDAO"%>
 <%@page import="modelo.Usuario"%>
 <%@include file="../cabecalho.jsp" %>
@@ -6,7 +7,7 @@
         UsuarioDAO dao = new UsuarioDAO();
         Usuario obj = new Usuario();
         obj.setLogin(request.getParameter("txtLogin"));
-        obj.setSenha(request.getParameter("txtSenha"));
+        obj.setSenha(Criptografia.convertPasswordToMD5(request.getParameter("txtSenha")));
         if (request.getParameter("txtAdmin") != null) {
             obj.setAdmin(true);
         } else {

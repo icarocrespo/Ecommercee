@@ -27,10 +27,7 @@
                     <div class="col-md-2 footer-grid">
                         <h4>Serviço</h4>
                         <ul>
-                            <li><a href="contact.jsp">Suporte</a></li>
-                            <li><a href="#">FAQ</a></li>
-                            <li><a href="#">Warranty</a></li>
-                            <li><a href="contact.jsp">Contate-nos</a></li>
+                            <li><a href="contact.jsp">Fale Conosco</a></li>
                         </ul>
                     </div>
                     <div class="col-md-2 footer-grid">
@@ -39,7 +36,6 @@
                             <li><a href="#">Status de Pedido</a></li>
                             <li><a href="#">Política de Envio</a></li>
                             <li><a href="#">Política de Devolução</a></li>
-                            <li><a href="#">Digital Gift Card</a></li>
                         </ul>
                     </div>
                     <div class="col-md-2 footer-grid">
@@ -55,12 +51,8 @@
                             <a href="https://www.instagram.com/icarocrespo/"><i class="icon"></i></a>
                             <a href="https://www.facebook.com/icarocrespo"><i class="icon1"></i></a>
                             <a href="https://www.twitter.com/icarocrespo"><i class="icon2"></i></a>
-                            <!--
-                                <a href="#"><i class="icon3"></i></a>
-                                <a href="#"><i class="icon4"></i></a> 
-                            -->
                         </div>
-                        <p>Copyright &copy; 2015 Swim Wear. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
+                        <p>Copyright &copy; 2016 Ícaro Crespo. Todos os direitos reservados | Design by <a href="http://w3layouts.com">W3layouts</a></p>
                     </div>
                     <div class="clearfix"></div>
                 </div>

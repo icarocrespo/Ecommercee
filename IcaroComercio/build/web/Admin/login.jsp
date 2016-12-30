@@ -20,12 +20,7 @@
     <head>
         <title>Login</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <style>
-        #login{
-           text-align: center; 
-           font-size: 40px;
-        }
-    </style>
+        <link rel="stylesheet" href="logincss.css" type="text/css" media="screen" />
     </head>
     <body>
         <div id="login">
@@ -37,7 +32,7 @@
                 <input type="password" name="txtSenhaE" required><br>
                 <input type="submit" value="Entrar"/>
             </form>
-            Não possui login?<br><a href="novologin.jsp"> Entre aqui</a><br />
+            Não possui login?<br><a href="novologin.jsp"> Clique aqui</a><br />
             <a href="#">Esqueci a Senha</a><br />
         </div>
     </body>
