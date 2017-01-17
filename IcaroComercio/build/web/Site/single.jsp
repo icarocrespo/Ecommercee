@@ -2,7 +2,7 @@
 <%@include file="cabecalho.jsp"%>
 <%    
     Produto obj = ppdao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
-    ProdutoDAO daoRelacionado = new ProdutoDAO();
+    //ProdutoDAO daoRelacionado = new ProdutoDAO();
     //List<Produto> relacionadoMLista = daoRelacionado.listarMarcaRelacionado(obj.getCodmarca().getCodigo().toString());
     //List<Produto> relacionadoCLista = daoRelacionado.listarCategoriaRelacionado(obj.getCodmarca().getCodigo().toString());
 
@@ -80,8 +80,8 @@
                     </div>
                     </form>
                     <div class="tag">
-                        <p>Categoria : <a href="products.jsp"> <%=obj.getCodcategoria().getNome()%> </a></p>
-                        <p>Marca : <a href="products.jsp"> <%=obj.getCodmarca().getNome()%> </a></p>
+                        <p>Categoria : <a href="products.jsp?filtroC=<%=obj.getCodcategoria().getCodigo()%>"> <%=obj.getCodcategoria().getNome()%> </a></p>
+                        <p>Marca : <a href="products.jsp?filtroM=<%=obj.getCodmarca().getCodigo()%>"> <%=obj.getCodmarca().getNome()%> </a></p>
                     </div>
                 </div>
                 <div class="clearfix"> </div>

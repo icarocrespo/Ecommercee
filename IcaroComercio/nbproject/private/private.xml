@@ -3,16 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/IFSul/IcaroComercio/src/java/modelo/Itemvenda.java</file>
-            <file>file:/E:/IFSul/IcaroComercio/web/Admin/usuario/add.jsp</file>
+            <file>file:/E:/IFSul/IcaroComercio/web/Site/rodape.jsp</file>
+            <file>file:/E:/IFSul/IcaroComercio/web/Site/finalizarCompra.jsp</file>
             <file>file:/E:/IFSul/IcaroComercio/web/Site/account.jsp</file>
             <file>file:/E:/IFSul/IcaroComercio/web/Site/checkout.jsp</file>
-            <file>file:/E:/IFSul/IcaroComercio/src/java/modelo/Produto.java</file>
+            <file>file:/E:/IFSul/IcaroComercio/web/Site/single.jsp</file>
             <file>file:/E:/IFSul/IcaroComercio/web/Site/login.jsp</file>
-            <file>file:/E:/IFSul/IcaroComercio/web/Site/index.jsp</file>
+            <file>file:/E:/IFSul/IcaroComercio/web/Site/products.jsp</file>
             <file>file:/E:/IFSul/IcaroComercio/web/Site/contact.jsp</file>
-            <file>file:/E:/IFSul/IcaroComercio/src/java/modelo/Usuario.java</file>
-            <file>file:/E:/IFSul/IcaroComercio/web/Admin/usuario/index.jsp</file>
+            <file>file:/E:/IFSul/IcaroComercio/web/Site/cabecalho.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -164,11 +164,11 @@ public final class checkout_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            <div class=\"header-top\">\n");
       out.write("                <div class=\"container\">\n");
       out.write("                    <div class=\"lang_list\">\n");
-      out.write("                        <select tabindex=\"4\" class=\"dropdown1\">\n");
+      out.write("                        <select tabindex=\"4\" class=\"dropdown1\" name=\"language\">\n");
       out.write("                            <option value=\"5\">Português</option>\n");
       out.write("                            <option value=\"1\">English</option>\n");
       out.write("                            <option value=\"2\">François</option>\n");
-      out.write("                            <option value=\"3\">German em alemão hue</option>\n");
+      out.write("                            <option value=\"3\">German</option>\n");
       out.write("                            <option value=\"6\">Español</option>\n");
       out.write("                        </select>\n");
       out.write("                    </div>\n");
@@ -289,6 +289,7 @@ public final class checkout_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        </div>\n");
       out.write("        <!--header-->");
       out.write('\n');
+    
     Carrinho carrinho;
     if (session.getAttribute("carrinho") != null) {
         carrinho = (Carrinho) session.getAttribute("carrinho");
@@ -299,22 +300,31 @@ public final class checkout_jsp extends org.apache.jasper.runtime.HttpJspBase
 
         Integer codigo = Integer.parseInt(request.getParameter("txtCodigo"));
         Integer quantidade = Integer.parseInt(request.getParameter("txtQuantidade"));
-
+        List<ItemCarrinho> itemCarrinho = new ArrayList<>();
         ItemCarrinho item = new ItemCarrinho();
         item.setQuantidade(quantidade);
         ProdutoDAO pdao = new ProdutoDAO();
         Produto produto = pdao.buscarPorChavePrimaria(codigo);
         item.setProduto(produto);
-        if (carrinho.getItemCarrinho() != null) {
-            List<ItemCarrinho> itemCarrinho = new ArrayList<>();
+        if (carrinho.getItemCarrinho() == null) {
             itemCarrinho.add(item);
             carrinho.setItemCarrinho(itemCarrinho);
-            Double total = carrinho.getTotal().doubleValue() + (quantidade * produto.getPreco().doubleValue());
+            Double total = quantidade * produto.getPreco().doubleValue();
             carrinho.setTotal(new BigDecimal(total));
         } else {
+            boolean achou = false;
+            for(ItemCarrinho obj : carrinho.getItemCarrinho()){
+                if(obj.getProduto().getCodigo() == codigo){
+                    obj.setQuantidade(obj.getQuantidade() + Integer.parseInt(request.getParameter("txtQuantidade")));
+                    achou = true;
+                    break;
+                }
+            }
+            if(!achou){
             carrinho.getItemCarrinho().add(item);
             Double total = carrinho.getTotal().doubleValue() + (quantidade * produto.getPreco().doubleValue());
             carrinho.setTotal(new BigDecimal(total));
+            }
         }
         session.setAttribute("carrinho", carrinho);
     }
@@ -329,8 +339,6 @@ public final class checkout_jsp extends org.apache.jasper.runtime.HttpJspBase
 
                     if (carrinho.getItemCarrinho() != null) {
                         for (ItemCarrinho item : carrinho.getItemCarrinho()) {
-
-
                 
       out.write("\n");
       out.write("                <div class=\"close1\"> </div>\n");
@@ -342,11 +350,11 @@ public final class checkout_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    </div>\n");
       out.write("                    <div class=\"cart-item-info\">\n");
       out.write("                        <h3><a href=\"#\"> ");
-      out.print(item.getProduto().getDescricao());
+      out.print(item.getProduto().getTitulo());
       out.write(" </a><span>Não sei o que é</span></h3>\n");
       out.write("                        <ul class=\"qty\">\n");
       out.write("                            <li><p>Quantidade: ");
-      out.print(request.getParameter("txtQuantidade"));
+      out.print(item.getQuantidade());
       out.write("</p></li>\n");
       out.write("                            <li><p> Tipo de Entrega</p></li>\n");
       out.write("                        </ul>\n");
@@ -365,7 +373,8 @@ public final class checkout_jsp extends org.apache.jasper.runtime.HttpJspBase
                     }
                 
       out.write("\n");
-      out.write("            </div>\t\n");
+      out.write("            </div>\n");
+      out.write("            <a href=\"finalizarCompra.jsp\" class=\"btn  btn-primary btn-sm\">Finalizar compra</a>\n");
       out.write("        </div>\n");
       out.write("    </div>\n");
       out.write("</div>\n");
@@ -398,10 +407,7 @@ public final class checkout_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <div class=\"col-md-2 footer-grid\">\n");
       out.write("                        <h4>Serviço</h4>\n");
       out.write("                        <ul>\n");
-      out.write("                            <li><a href=\"contact.jsp\">Suporte</a></li>\n");
-      out.write("                            <li><a href=\"#\">FAQ</a></li>\n");
-      out.write("                            <li><a href=\"#\">Warranty</a></li>\n");
-      out.write("                            <li><a href=\"contact.jsp\">Contate-nos</a></li>\n");
+      out.write("                            <li><a href=\"contact.jsp\">Fale Conosco</a></li>\n");
       out.write("                        </ul>\n");
       out.write("                    </div>\n");
       out.write("                    <div class=\"col-md-2 footer-grid\">\n");
@@ -410,7 +416,6 @@ public final class checkout_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            <li><a href=\"#\">Status de Pedido</a></li>\n");
       out.write("                            <li><a href=\"#\">Política de Envio</a></li>\n");
       out.write("                            <li><a href=\"#\">Política de Devolução</a></li>\n");
-      out.write("                            <li><a href=\"#\">Digital Gift Card</a></li>\n");
       out.write("                        </ul>\n");
       out.write("                    </div>\n");
       out.write("                    <div class=\"col-md-2 footer-grid\">\n");
@@ -426,12 +431,8 @@ public final class checkout_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            <a href=\"https://www.instagram.com/icarocrespo/\"><i class=\"icon\"></i></a>\n");
       out.write("                            <a href=\"https://www.facebook.com/icarocrespo\"><i class=\"icon1\"></i></a>\n");
       out.write("                            <a href=\"https://www.twitter.com/icarocrespo\"><i class=\"icon2\"></i></a>\n");
-      out.write("                            <!--\n");
-      out.write("                                <a href=\"#\"><i class=\"icon3\"></i></a>\n");
-      out.write("                                <a href=\"#\"><i class=\"icon4\"></i></a> \n");
-      out.write("                            -->\n");
       out.write("                        </div>\n");
-      out.write("                        <p>Copyright &copy; 2015 Swim Wear. All rights reserved | Design by <a href=\"http://w3layouts.com\">W3layouts</a></p>\n");
+      out.write("                        <p>Copyright &copy; 2016 Ícaro Crespo. Todos os direitos reservados | Design by <a href=\"http://w3layouts.com\">W3layouts</a></p>\n");
       out.write("                    </div>\n");
       out.write("                    <div class=\"clearfix\"></div>\n");
       out.write("                </div>\n");

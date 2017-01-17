@@ -2,12 +2,15 @@
 <%@page import="modelo.Cliente"%>
 <%@page import="dao.ClienteDAO"%>
 <%@include file="cabecalho.jsp" %>
-<%    if (request.getMethod().equals("POST")) {
+<%    
+    if (request.getMethod().equals("POST")) {
         ClienteDAO dao = new ClienteDAO();
         List<Cliente> cliente = dao.listar();
+        
         for (Cliente item : cliente) {
             if (request.getParameter("txtEmail").equals(item.getEmail()) && Criptografia.convertPasswordToMD5(request.getParameter("txtSenha")).equals(item.getSenha())) {
-                
+               session.setAttribute("cliente", item.getNome());
+               response.sendRedirect("index.jsp");
             }
         }
     }

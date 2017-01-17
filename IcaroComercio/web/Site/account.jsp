@@ -5,7 +5,19 @@
 <%    
     ClienteDAO dao = new ClienteDAO();
     Cliente obj = new Cliente();
-    if(request.getMethod().equals("POST")){
+    List<Cliente> clientes = dao.listar();
+
+    boolean achou = false;
+    if (!clientes.isEmpty()) {
+        for (Cliente item : clientes) {
+            if (request.getParameter("txtEmail").equals(item.getEmail())) {
+                String mensagem = "Email ja cadastrado";
+                achou = true;
+            }
+        }
+    }
+
+    if (request.getMethod().equals("POST") && achou == false) {
         obj.setNome(request.getParameter("txtNome"));
         obj.setEmail(request.getParameter("txtEmail"));
         obj.setSenha(Criptografia.convertPasswordToMD5(request.getParameter("txtSenha")));
@@ -14,7 +26,9 @@
         obj.setEstado(request.getParameter("txtUF"));
         obj.setCep(request.getParameter("txtCEP"));
         dao.incluir(obj);
+        response.sendRedirect("index.jsp");
     }
+
 %>
 <div class="content">
 
@@ -74,7 +88,7 @@
                 <div class="clearfix"> </div>
                 <div class="register-but">
                     <form>
-                        <input type="submit" value="submit">
+                        <input type="submit" value="enviar">
                         <div class="clearfix"> </div>
                     </form>
                 </div>
